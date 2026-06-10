@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /static/uploads/
+Disallow: /static/outputs/
+Disallow: /api/
+
+Sitemap: https://yoursite.com/sitemap.xml
