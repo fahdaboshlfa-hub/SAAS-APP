@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===== SEO ===== -->
+  <title>محوّل الصور | تحويل PNG JPG WebP وإزالة الخلفية مجاناً</title>
+  <meta name="description" content="أداة مجانية لتحويل الصور بين PNG وJPG وWebP، إزالة الخلفية، ضغط الصور، وتغيير الأبعاد. سريع وآمن وبدون رفع البيانات لخوادم خارجية." />
+  <meta name="keywords" content="تحويل صور, محوّل صور, PNG إلى WebP, إزالة خلفية, ضغط صور, تغيير حجم صور, JPG PNG" />
+  <meta name="author" content="محوّل الصور" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://yoursite.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="محوّل الصور المجاني | PNG JPG WebP" />
+  <meta property="og:description" content="تحويل الصور، إزالة الخلفية، ضغط وتغيير الأبعاد — كل ذلك مجاناً وبسرعة." />
+  <meta property="og:url" content="https://yoursite.com/" />
+  <meta property="og:locale" content="ar_SA" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="محوّل الصور المجاني" />
+  <meta name="twitter:description" content="تحويل PNG JPG WebP وإزالة الخلفية مجاناً" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "محوّل الصور",
+    "url": "https://yoursite.com",
+    "description": "أداة مجانية لتحويل الصور بين صيغ PNG وJPG وWebP مع دعم إزالة الخلفية وضغط الصور",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "inLanguage": "ar"
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #D4A017;
+      --gold-light: #F0C040;
+      --green: #1B4332;
+      --green-mid: #2D6A4F;
+      --black: #0A0A0A;
+      --surface: #111111;
+      --surface2: #1A1A1A;
+      --surface3: #222222;
+      --border: #2A2A2A;
+      --text: #F0F0F0;
+      --muted: #888;
+      --radius: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--black);
+      color: var(--text);
+      min-height: 100vh;
+      direction: rtl;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 1.4rem; font-weight: 900; color: var(--gold); letter-spacing: -0.5px; }
+    .logo span { color: var(--text); }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 72px 24px 48px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,160,23,0.08) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(212,160,23,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(212,160,23,0.3);
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    h1 .accent { color: var(--gold); }
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .features-strip {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .feat-chip {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+    }
+    .feat-chip svg { vertical-align: middle; margin-left: 4px; }
+
+    /* MAIN TOOL */
+    .tool-container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 16px 80px;
+    }
+
+    /* DROP ZONE */
+    .dropzone {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      background: var(--surface2);
+      padding: 56px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+      position: relative;
+    }
+    .dropzone.drag-over {
+      border-color: var(--gold);
+      background: rgba(212,160,23,0.05);
+    }
+    .dropzone input { display: none; }
+    .dz-icon { font-size: 3rem; margin-bottom: 12px; opacity: .6; }
+    .dz-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .dz-sub { color: var(--muted); font-size: 0.88rem; }
+    .dz-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      padding: 10px 28px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      font-size: 0.95rem;
+      transition: opacity .2s;
+    }
+    .dz-btn:hover { opacity: .85; }
+
+    /* OPTIONS */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    @media(max-width:600px) { .options-grid { grid-template-columns: 1fr; } }
+    .opt-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .opt-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    select, input[type=number] {
+      width: 100%;
+      background: var(--surface3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color .2s;
+      direction: rtl;
+    }
+    select:focus, input[type=number]:focus { border-color: var(--gold); }
+
+    .action-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .tab {
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface3);
+      color: var(--muted);
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all .2s;
+    }
+    .tab.active {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+
+    /* QUALITY SLIDER */
+    .quality-wrap { display: flex; align-items: center; gap: 12px; }
+    input[type=range] {
+      flex: 1;
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
+    .quality-val {
+      min-width: 36px;
+      text-align: center;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    /* SIZE INPUTS */
+    .size-row { display: flex; gap: 8px; align-items: center; }
+    .size-row input { flex: 1; }
+    .size-x { color: var(--muted); font-weight: 700; }
+
+    /* CONVERT BTN */
+    .convert-btn {
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      padding: 16px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity .2s, transform .1s;
+    }
+    .convert-btn:hover { opacity: .88; }
+    .convert-btn:active { transform: scale(.99); }
+    .convert-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* PROGRESS */
+    .progress-wrap { margin-top: 16px; display: none; }
+    .progress-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 4px;
+      width: 0%;
+      transition: width .3s;
+    }
+    .progress-text { color: var(--muted); font-size: .85rem; margin-top: 8px; text-align: center; }
+
+    /* RESULTS */
+    .results { margin-top: 32px; }
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .results-title { font-size: 1rem; font-weight: 700; color: #fff; }
+    .dl-all-btn {
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-family: 'Cairo', sans-serif;
+      font-size: .88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .dl-all-btn:hover { background: var(--green-mid); }
+
+    .result-grid { display: flex; flex-direction: column; gap: 10px; }
+    .result-item {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .result-thumb {
+      width: 52px; height: 52px;
+      border-radius: 6px;
+      object-fit: cover;
+      background: var(--surface3);
+      flex-shrink: 0;
+    }
+    .result-info { flex: 1; min-width: 0; }
+    .result-name { font-size: .9rem; font-weight: 700; color: #fff; word-break: break-all; }
+    .result-size { color: var(--gold); font-size: .8rem; margin-top: 2px; }
+    .result-error { color: #ff6b6b; font-size: .82rem; }
+    .dl-btn {
+      background: var(--surface3);
+      color: var(--gold);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-family: 'Cairo', sans-serif;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .dl-btn:hover { background: var(--border); }
+
+    /* PREVIEW modal */
+    .modal-bg {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.85);
+      z-index: 200;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-bg.open { display: flex; }
+    .modal-img { max-width: 90vw; max-height: 90vh; border-radius: 8px; }
+    .modal-close {
+      position: absolute; top: 20px; left: 20px;
+      color: #fff; font-size: 2rem; cursor: pointer; line-height: 1;
+    }
+
+    /* FAQ — SEO content */
+    .faq-section {
+      max-width: 820px;
+      margin: 0 auto 80px;
+      padding: 0 16px;
+    }
+    .faq-section h2 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+    }
+    .faq-q {
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-q span { transition: transform .2s; }
+    .faq-a {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.7;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s, padding .3s;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding-top: 10px; }
+    .faq-item.open .faq-q span { transform: rotate(45deg); }
+
+    /* FOOTER */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 28px 16px;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* Previews in dropzone */
+    .file-previews {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center; margin-top: 16px;
+    }
+    .preview-thumb {
+      width: 60px; height: 60px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 2px solid var(--border);
+    }
+    .file-count { color: var(--gold); font-weight: 700; margin-top: 8px; font-size: .9rem; }
+
+    @media(max-width:480px) {
+      nav { padding: 12px 16px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">محوّل<span>الصور</span></div>
+  <ul class="nav-links">
+    <li><a href="#tool">الأداة</a></li>
+    <li><a href="#faq">أسئلة شائعة</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">✦ مجاني 100% — بدون تسجيل</div>
+  <h1>تحويل الصور<br><span class="accent">بلمسة واحدة</span></h1>
+  <p class="hero-sub">حوّل صورك بين PNG وJPG وWebP، أزل الخلفية، اضغط الحجم، وغيّر الأبعاد — كل ذلك مباشرة في متصفحك.</p>
+  <div class="features-strip">
+    <span class="feat-chip">🔄 PNG ↔ JPG ↔ WebP</span>
+    <span class="feat-chip">🎭 إزالة الخلفية</span>
+    <span class="feat-chip">📦 ضغط الصور</span>
+    <span class="feat-chip">📐 تغيير الأبعاد</span>
+    <span class="feat-chip">⚡ معالجة جماعية</span>
+  </div>
+</header>
+
+<!-- TOOL -->
+<main class="tool-container" id="tool">
+
+  <!-- Drop zone -->
+  <div class="dropzone" id="dropzone">
+    <input type="file" id="fileInput" multiple accept="image/*" />
+    <div class="dz-icon">🖼️</div>
+    <div class="dz-title">اسحب صورك هنا أو اضغط لاختيارها</div>
+    <div class="dz-sub">PNG · JPG · WebP · GIF · BMP · TIFF — حتى 50 ميجا</div>
+    <button class="dz-btn" onclick="document.getElementById('fileInput').click()">اختر صور</button>
+    <div class="file-previews" id="filePreviews"></div>
+    <div class="file-count" id="fileCount"></div>
+  </div>
+
+  <!-- Action Tabs -->
+  <div style="margin:24px 0 8px">
+    <div class="opt-label">العملية المطلوبة</div>
+    <div class="action-tabs" id="actionTabs">
+      <button class="tab active" data-action="convert">🔄 تحويل الصيغة</button>
+      <button class="tab" data-action="rembg">🎭 إزالة الخلفية</button>
+      <button class="tab" data-action="resize">📐 تغيير الأبعاد</button>
+    </div>
+  </div>
+
+  <!-- Options -->
+  <div class="options-grid">
+    <!-- Format -->
+    <div class="opt-card" id="formatCard">
+      <div class="opt-label">الصيغة المستهدفة</div>
+      <select id="formatSelect">
+        <option value="webp">WebP (موصى به للويب)</option>
+        <option value="png">PNG (شفافية)</option>
+        <option value="jpg">JPG (صغير الحجم)</option>
+        <option value="gif">GIF</option>
+      </select>
+    </div>
+    <!-- Quality -->
+    <div class="opt-card">
+      <div class="opt-label">جودة الصورة</div>
+      <div class="quality-wrap">
+        <input type="range" id="qualityRange" min="10" max="100" value="85" />
+        <div class="quality-val" id="qualityVal">85</div>
+      </div>
+    </div>
+    <!-- Width -->
+    <div class="opt-card" id="sizeCard">
+      <div class="opt-label">الأبعاد (اختياري)</div>
+      <div class="size-row">
+        <input type="number" id="widthInput" placeholder="عرض" min="1" />
+        <span class="size-x">×</span>
+        <input type="number" id="heightInput" placeholder="ارتفاع" min="1" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Convert Button -->
+  <button class="convert-btn" id="convertBtn" disabled>تحويل الصور</button>
+
+  <!-- Progress -->
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text" id="progressText">جاري المعالجة...</div>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results" style="display:none">
+    <div class="results-header">
+      <div class="results-title" id="resultsTitle">النتائج</div>
+      <button class="dl-all-btn" id="dlAllBtn">⬇ تحميل الكل (ZIP)</button>
+    </div>
+    <div class="result-grid" id="resultGrid"></div>
+  </div>
+
+</main>
+
+<!-- FAQ — SEO -->
+<section class="faq-section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
+  <h2>أسئلة شائعة</h2>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-q" itemprop="name">ما الفرق بين PNG وWebP وJPG؟ <span>+</span></div>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+      <div itemprop="text">WebP هي الصيغة الأحدث من Google وتوفر ضغطاً أفضل بنسبة 25-34% من JPG مع نفس الجودة. JPG مثالي للصور الفوتوغرافية حيث الحجم الصغير أهم من الشفافية. PNG يحافظ على الشفافية ومناسب للشعارات والرسومات.</div>
+    </div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-q" itemprop="name">هل تحويل الصور مجاني بالكامل؟ <span>+</span></div>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+      <div itemprop="text">نعم، الأداة مجانية 100% بدون حد للاستخدام ولا تسجيل مطلوب. يمكنك تحويل عدد غير محدود من الصور.</div>
+    </div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-q" itemprop="name">كيف تعمل إزالة الخلفية؟ <span>+</span></div>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+      <div itemprop="text">نستخدم تقنية الذكاء الاصطناعي (rembg) المبنية على نماذج تعلم آلي متقدمة تفصل الشخص أو الجسم الرئيسي عن الخلفية تلقائياً وتعيد الصورة بخلفية شفافة بصيغة PNG.</div>
+    </div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-q" itemprop="name">هل صوري آمنة؟ <span>+</span></div>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+      <div itemprop="text">الصور تُعالَج على السيرفر بشكل مؤقت وتُحذف تلقائياً. لا نحتفظ بأي صورة ولا نشاركها مع أي طرف ثالث.</div>
+    </div>
+  </div>
+
+  <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <div class="faq-q" itemprop="name">ما الحجم الأقصى للصورة؟ <span>+</span></div>
+    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+      <div itemprop="text">الحد الأقصى 50 ميجابايت لكل صورة. يمكنك رفع عدة صور في نفس الوقت للمعالجة الجماعية.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg">
+  <span class="modal-close" onclick="closeModal()">✕</span>
+  <img class="modal-img" id="modalImg" src="" alt="معاينة الصورة" />
+</div>
+
+<footer>
+  <p>محوّل الصور © 2025 — أداة مجانية لتحويل الصور | <a href="#">سياسة الخصوصية</a></p>
+</footer>
+
+<script>
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+const convertBtn = document.getElementById('convertBtn');
+const filePreviews = document.getElementById('filePreviews');
+const fileCount = document.getElementById('fileCount');
+const progressWrap = document.getElementById('progressWrap');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+const results = document.getElementById('results');
+const resultGrid = document.getElementById('resultGrid');
+const qualityRange = document.getElementById('qualityRange');
+const qualityVal = document.getElementById('qualityVal');
+
+let selectedFiles = [];
+let currentAction = 'convert';
+let outputFiles = [];
+
+// Quality slider
+qualityRange.addEventListener('input', () => {
+  qualityVal.textContent = qualityRange.value;
+});
+
+// Action tabs
+document.getElementById('actionTabs').addEventListener('click', e => {
+  const tab = e.target.closest('.tab');
+  if (!tab) return;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  currentAction = tab.dataset.action;
+  // show/hide format card based on action
+  document.getElementById('formatCard').style.opacity =
+    currentAction === 'rembg' ? '0.4' : '1';
+});
+
+// Drag & Drop
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag-over'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+dropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropzone.classList.remove('drag-over');
+  handleFiles([...e.dataTransfer.files]);
+});
+fileInput.addEventListener('change', () => handleFiles([...fileInput.files]));
+
+function handleFiles(files) {
+  selectedFiles = files.filter(f => f.type.startsWith('image/'));
+  filePreviews.innerHTML = '';
+  selectedFiles.forEach(f => {
+    const img = document.createElement('img');
+    img.className = 'preview-thumb';
+    img.src = URL.createObjectURL(f);
+    img.alt = f.name;
+    filePreviews.appendChild(img);
+  });
+  fileCount.textContent = selectedFiles.length > 0
+    ? `تم اختيار ${selectedFiles.length} صورة` : '';
+  convertBtn.disabled = selectedFiles.length === 0;
+}
+
+// Convert
+convertBtn.addEventListener('click', async () => {
+  if (!selectedFiles.length) return;
+
+  convertBtn.disabled = true;
+  progressWrap.style.display = 'block';
+  results.style.display = 'none';
+  resultGrid.innerHTML = '';
+  outputFiles = [];
+  setProgress(10, 'جاري رفع الصور...');
+
+  const fd = new FormData();
+  selectedFiles.forEach(f => fd.append('images', f));
+  fd.append('action', currentAction);
+  fd.append('format', document.getElementById('formatSelect').value);
+  fd.append('quality', qualityRange.value);
+  fd.append('width', document.getElementById('widthInput').value);
+  fd.append('height', document.getElementById('heightInput').value);
+
+  try {
+    setProgress(40, 'جاري المعالجة...');
+    const res = await fetch('/api/convert', { method: 'POST', body: fd });
+    const data = await res.json();
+    setProgress(100, 'تم!');
+
+    setTimeout(() => {
+      progressWrap.style.display = 'none';
+      renderResults(data);
+      convertBtn.disabled = false;
+    }, 500);
+  } catch (err) {
+    setProgress(0, 'حدث خطأ — تأكد أن السيرفر يعمل');
+    convertBtn.disabled = false;
+  }
+});
+
+function setProgress(pct, msg) {
+  progressFill.style.width = pct + '%';
+  progressText.textContent = msg;
+}
+
+function renderResults(data) {
+  results.style.display = 'block';
+  const ok = data.filter(d => !d.error);
+  const fail = data.filter(d => d.error);
+  document.getElementById('resultsTitle').textContent =
+    `النتائج (${ok.length} ناجح${fail.length ? ' · ' + fail.length + ' فشل' : ''})`;
+  outputFiles = ok.map(d => d.name);
+
+  data.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'result-item';
+    if (item.error) {
+      div.innerHTML = `
+        <div class="result-thumb" style="background:var(--surface3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;">⚠️</div>
+        <div class="result-info">
+          <div class="result-name">${item.name}</div>
+          <div class="result-error">${item.error}</div>
+        </div>`;
+    } else {
+      div.innerHTML = `
+        <img class="result-thumb" src="${item.url}" alt="${item.name}" onclick="openModal('${item.url}')" style="cursor:zoom-in" />
+        <div class="result-info">
+          <div class="result-name">${item.name}</div>
+          <div class="result-size">📦 ${item.size} KB</div>
+        </div>
+        <a class="dl-btn" href="${item.url}" download="${item.name}">⬇ تحميل</a>`;
+    }
+    resultGrid.appendChild(div);
+  });
+}
+
+// Download all as zip
+document.getElementById('dlAllBtn').addEventListener('click', async () => {
+  if (!outputFiles.length) return;
+  const res = await fetch('/api/download-zip', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ files: outputFiles })
+  });
+  const blob = await res.blob();
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'converted_images.zip';
+  a.click();
+});
+
+// Modal
+function openModal(src) {
+  document.getElementById('modalImg').src = src;
+  document.getElementById('modalBg').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('open');
+}
+document.getElementById('modalBg').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalBg')) closeModal();
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+});
+</script>
+</body>
+</html>
